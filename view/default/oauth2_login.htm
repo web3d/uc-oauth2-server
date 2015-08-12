@@ -1,0 +1,30 @@
+{template '.oauth2_header'}
+
+<div class="container">
+	<form  method="post" id="loginform" {if $iframe}target="_self"{else}target="_top"{/if}>
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="seccodehidden" value="$seccodeinit" />
+		<input type="hidden" name="iframe" value="{$iframe}" />
+		<table class="mainbox">
+			<tr>
+				<td class="loginbox">
+					<h1>UCenter OAuth2</h1>
+					<p>提示：为保障帐号安全，请认准本页URL地址必须以 xxx.com 开头</p>
+				</td>
+				<td class="login">
+					<div class="errormsg loginmsg"><p>{$msg}</p></div>
+					<p>
+						
+					</p>
+					<p id="usernamediv">{lang login_username}: <input type="text" name="username" class="txt" tabindex="1" id="username" value="$username" /></p>
+					<p>{lang login_password}: <input type="password" name="password" class="txt" tabindex="2" id="password" value="$password" /></p>
+                    <p>{lang login_seccode}: <input type="text" name="seccode" class="txt seccode" tabindex="2" id="seccode" value="1111" /><img width="70" height="21" src="#" class="checkcode" /></p>
+					
+					<p class="loginbtn"><input type="submit" name="submit" value="{lang login_submit}" class="btn" tabindex="3" /><a href="#" target="_blank" class="rstpsw">注册</a>&nbsp;<a href="#" target="_blank" class="rstpsw">{lang login_getpw}</a></p>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+{template footer}
