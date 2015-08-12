@@ -61,7 +61,7 @@ class Bootstrap {
     /**
      * 运行oauth服务容器，并且需要指定鉴权类型
      * 每调用一次，会增加一种鉴权方式
-     * @param string $grantType
+     * @param string $grantType 传空值代表不初始化鉴权类型
      * @return OAuth2_Server
      */
     public static function runOAuth2Server($grantType = self::GRANTTYPE_CODE) {
@@ -72,7 +72,9 @@ class Bootstrap {
             self::$oauth2Server = new OAuth2_Server(self::$oauth2Storage);
         }
         
-        self::$oauth2Server->addGrantType(self::_initGranter($grantType));
+        if ($grantType) {
+            self::$oauth2Server->addGrantType(self::_initGranter($grantType));
+        }
         
         return self::$oauth2Server;
     }
