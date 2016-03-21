@@ -11,11 +11,15 @@ discuz uc_server 的 oauth2实现
 
 编辑uc_server/view/default/admin_frame_menu.htm 文件,在
 
+```html
 <!--{if $user['isfounder']}--><li><a href="admin.php?m=plugin&a=filecheck" target="main">{lang plugin}</a></li><!--{/if}-->
+```
 
 这行下增加一行:
 
+```html
 <!--{if $user['isfounder']}--><li><a href="admin.php?m=plugin&a=oauth2" target="main">{lang plugin_oauth2}</a></li><!--{/if}-->
+```
 
 ### 2. DB初始化
 
