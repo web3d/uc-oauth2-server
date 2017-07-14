@@ -18,7 +18,7 @@
     <h3 class="marginbot">{lang app_list}<a href="admin.php?m=app&a=add" class="sgbtn">{lang app_add}</a></h3>
     <!--{if !$status}-->
     <div class="note fixwidthdec">
-        <p class="i">{lang app_list_tips}</p>
+        <p class="i">{lang oauth2_app_list_tips}</p>
     </div>
     <!--{elseif $status == '2'}-->
     <div class="correctmsg"><p>{lang app_list_updated}</p></div>
@@ -45,7 +45,7 @@
                     <td width="90"><!--{if $app['is_mobile']}-->{lang yes}<!--{else}-->{lang no}<!--{/if}--></td>
                     <td><!--{if $app['is_mobile']}-->-<!--{else}--><a href="$app['redirect_uri']" target="_blank">$app['redirect_uri']</a><!--{/if}--></td>
                     
-                    <td width="40"><a href="admin.php?m=plugin&a=oauth2&do=edit&appid=$app['appid']">{lang app_edit}</a></td>
+                    <td width="120"><a href="admin.php?m=plugin&a=oauth2&do=edit&appid=$app['appid']">{lang oauth2_app_edit_oauth}</a></td>
                 </tr>
                 <!--{eval $i++}-->
                 <!--{/loop}-->
