@@ -32,8 +32,8 @@
                     <th nowrap="nowrap"><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall">{lang app_delete}</label></th>
                     <th nowrap="nowrap">{lang app_id}</th>
                     <th nowrap="nowrap">{lang app_name}</th>
-                    <th nowrap="nowrap">{lang app_linkstatus}</th>
-                    <th nowrap="nowrap">{lang app_url}</th>
+                    <th nowrap="nowrap">{lang oauth2_app_is_mobile}</th>
+                    <th nowrap="nowrap">{lang oauth2_app_redirect_uri}</th>
                     <th nowrap="nowrap">{lang app_detail}</th>
                 </tr>
                 <!--{eval $i = 0;}-->
@@ -42,7 +42,7 @@
                     <td width="50"><input type="checkbox" name="delete[]" value="$app[appid]" class="checkbox" /></td>
                     <td width="35">$app['appid']</td>
                     <td width="200"><a href="admin.php?m=app&a=detail&appid=$app[appid]"><strong>$app[name]</strong></a></td>
-                    <td width="90"><!--{if $app['is_mobile']}-->移动应用<!--{else}-->Web应用<!--{/if}--></td>
+                    <td width="90"><!--{if $app['is_mobile']}-->{lang yes}<!--{else}-->{lang no}<!--{/if}--></td>
                     <td><!--{if $app['is_mobile']}-->-<!--{else}--><a href="$app['redirect_uri']" target="_blank">$app['redirect_uri']</a><!--{/if}--></td>
                     
                     <td width="40"><a href="admin.php?m=plugin&a=oauth2&do=edit&appid=$app['appid']">{lang app_edit}</a></td>
