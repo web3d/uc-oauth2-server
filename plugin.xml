@@ -1,17 +1,72 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <root>
-	<item id="name">文件权限检查</item>
+	<item id="name">OAuth2Server</item>
 	<item id="version">1.0.0</item>
-	<item id="author">Monkey</item>
-	<item id="date">2008-6-16</item>
-	<item id="lastmodified">2008-6-16</item>
-	<item id="copyright">Comsenz 所有</item>
+	<item id="author">Jimmy</item>
+	<item id="date">2016-5-16</item>
+	<item id="lastmodified">2017-07-14</item>
+	<item id="copyright"></item>
 	<item id="tabindex">2</item>
-	<item id="tips">检查 UCenter 文件是否被修改。</item>
+	<item id="tips">提供基于UC Server的OAuth2 服务端机制；应用管理基于ucserver自带机制</item>
 	<item id="lang">
-		<item id="plugin_filecheck_modifed">被修改</item>
-		<item id="plugin_filecheck_deleted">被删除</item>
-		<item id="plugin_filecheck_unknow">未知</item>
-		<item id="plugin_filecheck_modifed_in_aweek">一周内被修改</item>
+		<item id="plugin_oauth2">OAuth2Server</item>
+		<item id="oauth2_app_id">应用ID</item>
+		<item id="oauth2_app_user">所属用户</item>
+		<item id="oauth2_app_is_mobile">移动应用</item>
+		<item id="oauth2_app_is_mobile_comment">选否代表普通Web应用，选是代表移动应用无需填写回跳地址</item>
+		<item id="oauth2_app_redirect_uri">回跳地址</item>
+		<item id="oauth2_app_redirect_uri_comment">Web应用需要填写用户完成授权后回跳页面地址</item>
 	</item>
+	<item id="install"><![CDATA[
+CREATE TABLE uc_oauth_users (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(2000) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE uc_oauth_authorization_codes (
+  `authorization_code` varchar(40) NOT NULL,
+  `client_id` varchar(80) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `redirect_uri` varchar(2000) NOT NULL,
+  `expires` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `scope` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`authorization_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE uc_oauth_access_tokens (
+  `access_token` varchar(40) NOT NULL,
+  `client_id` varchar(80) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `expires` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `scope` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`access_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE uc_oauth_clients (
+  `client_id` varchar(80) NOT NULL,
+  `client_secret` varchar(80) NOT NULL,
+  `redirect_uri` varchar(2000) NOT NULL,
+  PRIMARY KEY (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE uc_oauth_refresh_tokens (
+  `refresh_token` varchar(40) NOT NULL,
+  `client_id` varchar(80) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `expires` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `scope` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`refresh_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE uc_applications 
+ADD COLUMN `redirect_uri` VARCHAR(2000) NOT NULL DEFAULT '' AFTER `allowips`,
+ADD COLUMN `is_mobile` TINYINT(1) NOT NULL DEFAULT 0 AFTER `redirect_uri`,
+ADD COLUMN `is_deleted` TINYINT(1) NOT NULL DEFAULT 0 AFTER `is_mobile`,
+ADD COLUMN `scope` VARCHAR(200) NOT NULL DEFAULT '' AFTER `is_deleted`,
+ADD COLUMN `user_id` INT NOT NULL DEFAULT 0 AFTER `scope`,
+ADD COLUMN `grant_types` VARCHAR(200) NOT NULL DEFAULT '' AFTER `user_id`;
+	]]></item>
 </root>

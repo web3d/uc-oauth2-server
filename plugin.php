@@ -17,12 +17,18 @@ class control extends pluginbase
         $this->load('app');
         $this->load('misc');
     }
+    
+    function control() {
+		$this->pluginbase();
+	}
 
     /**
      * 应用列表
      */
     public function onindex()
     {
+        $this->init_schema();
+        
         $status = $affectedrows = 0;
         if ($this->submitcheck() && !empty($_POST['delete'])) {
             $affectedrows += $_ENV['app']->delete_apps($_POST['delete']);
@@ -99,6 +105,71 @@ class control extends pluginbase
             $arr[$note['appid']] = $note;
         }
         return $arr;
+    }
+    
+    /**
+     * 初始化db结构
+     */
+    private function init_schema()
+    {
+        if (!empty($this->plugin['install']) 
+            && !$this->db->fetch_first("SHOW TABLES LIKE '%" . UC_DBTABLEPRE . "oauth_users%'")) {
+            $this->run_sql($this->plugin['install']);
+        }
+    }
+    
+    /**
+     * 从安装脚本中移植的方法
+     * @param string $sql
+     * @return void
+     */
+    private function run_sql($sql)
+    {
+        if (empty($sql))
+            return;
+        
+        $origin_tablepre = 'uc_';
+
+        $sql = str_replace("\r", "\n", str_replace(' ' . $origin_tablepre, ' ' . UC_DBTABLEPRE, $sql));
+        $ret = array();
+        $num = 0;
+        foreach (explode(";\n", trim($sql)) as $query) {
+            $ret[$num] = '';
+            $queries = explode("\n", trim($query));
+            foreach ($queries as $query) {
+                $ret[$num] .= (isset($query[0]) && $query[0] == '#') || (isset($query[1]) && isset($query[1]) && $query[0] . $query[1] == '--') ? '' : $query;
+            }
+            $num++;
+        }
+
+        foreach ($ret as $query) {
+            $query = trim($query);
+            if (!$query) {
+                continue;
+            }
+            
+            if (substr($query, 0, 12) == 'CREATE TABLE') {
+                $query = $this->fix_table_creation($query);
+            }
+            
+            $this->db->query($query);
+        }
+    }
+    
+    /**
+     * 从SQL中整理创建表的预防,主要是作版本兼容处理
+     * @param string $sql
+     * @return string
+     */
+    private function fix_table_creation($sql)
+    {
+        $type = strtoupper(preg_replace("/^\s*CREATE TABLE\s+.+\s+\(.+?\).*(ENGINE|TYPE)\s*=\s*([a-z]+?).*$/isU", "\\2", $sql));
+        $type = in_array($type, array('MYISAM', 'HEAP')) ? $type : 'MYISAM';
+        return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql) 
+                . ($this->db->version() > '4.1' 
+                    ? " ENGINE=$type DEFAULT CHARSET=" . UC_DBCHARSET 
+                    : " TYPE=$type"
+                );
     }
 
 }

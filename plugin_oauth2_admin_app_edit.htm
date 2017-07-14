@@ -15,30 +15,32 @@
 			<input type="hidden" name="formhash" value="{FORMHASH}">
 				<table class="opt">
 					<tr>
-						<th colspan="2">{lang app_id}: $app['appid'] $app['name']</th>
+						<th colspan="2">$app['name']({lang oauth2_app_id}: $app['appid'])</th>
 					</tr>
-                                        
-                                        <tr>
-						<th colspan="2">{lang app_user}: $app['user_id']</th>
+
+                    <!--{if $app['user_id']}-->
+                    <tr>
+						<th colspan="2">{lang oauth2_app_user}: $app['user_id']</th>
 					</tr>
+                    <!--{/if}-->
 					
 					<tr>
-						<th colspan="2">{lang app_is_mobile}:</th>
+						<th colspan="2">{lang oauth2_app_is_mobile}:</th>
 					</tr>
 					<tr>
 						<td>
 							<input type="radio" class="radio" id="yes" name="is_mobile" value="1" {if $app['is_mobile']}checked{/if} /><label for="yes">{lang yes}</label>
 							<input type="radio" class="radio" id="no" name="is_mobile" value="0" {if !$app['is_mobile']}checked{/if} /><label for="no">{lang no}</label>
 						</td>
-						<td>{lang app_is_mobile_comment}</td>
+						<td>{lang oauth2_app_is_mobile_comment}</td>
 					</tr>
                                         
                                         <tr>
-						<th colspan="2">{lang app_redirect_uri}:</th>
+						<th colspan="2">{lang oauth2_app_redirect_uri}:</th>
 					</tr>
 					<tr>
 						<td><input type="text" class="txt" name="redirect_uri" value="$app['redirect_uri']" /></td>
-						<td>{lang app_redirect_uri_comment}</td>
+						<td>{lang oauth2_app_redirect_uri_comment}</td>
 					</tr>
 					
 				</table>

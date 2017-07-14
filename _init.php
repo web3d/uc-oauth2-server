@@ -19,11 +19,11 @@ define('STATIC_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 
 require_once UC_ROOT . 'release/release.php';
 require_once UC_DATADIR . 'config.inc.php';
 
-if (constant('UC_DEBUG')) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ERROR);
+if (UC_DEBUG) {
+    ini_set('display_errors', true);
+    error_reporting(E_ALL);
 } else {
-    ini_set('display_errors', 0);
+    ini_set('display_errors', false);
     error_reporting(0);
 }
 
