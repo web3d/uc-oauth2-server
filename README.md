@@ -7,6 +7,8 @@ discuz uc_server 的 oauth2实现
 
 ## 安装
 
+先将代码检出到 uc_server/plugin 目录下。
+
 ### 1. 增加后台菜单
 
 编辑uc_server/view/default/admin_frame_menu.htm 文件,在
