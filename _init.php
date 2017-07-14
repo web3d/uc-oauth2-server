@@ -19,13 +19,8 @@ define('STATIC_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 
 require_once UC_ROOT . 'release/release.php';
 require_once UC_DATADIR . 'config.inc.php';
 
-if (UC_DEBUG) {
-    ini_set('display_errors', true);
-    error_reporting(E_ALL);
-} else {
-    ini_set('display_errors', false);
-    error_reporting(0);
-}
+ini_set('display_errors', UC_DEBUG ? true : false);
+error_reporting(UC_DEBUG ? E_ALL: 0);
 
 require_once(__DIR__ . '/lib/vendor/bshaffer/oauth2-server/src/OAuth2/Autoloader.php');
 require_once(__DIR__ . '/lib/UCServer/Autoloader.php');
