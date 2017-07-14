@@ -157,7 +157,7 @@ class Template
 
     protected function complie_callback_stripvtag_template1($matches)
     {
-        return $this->stripvtag('<? include $this->gettpl(' . $matches[1] . '); ?>');
+        return $this->stripvtag('<? include $this->getTpl(' . $matches[1] . '); ?>');
     }
 
     protected function arrayindex($name, $items)
@@ -168,7 +168,7 @@ class Template
 
     protected function stripvtag($s)
     {
-        return preg_replace("/$this->vtag_regexp/is", "\\1", str_replace("\\\"", '"', $s));
+        return preg_replace("/$this->regexpVTag/is", "\\1", str_replace("\\\"", '"', $s));
     }
 
     protected function loopsection($arr, $k, $v, $statement)
