@@ -24,7 +24,7 @@ git clone https://github.com/web3d/uc-oauth2-server.git oauth2
 这行下增加一行:
 
 ```html
-<!--{if $user['isfounder']}--><li><a href="admin.php?m=plugin&a=oauth2" target="main">{lang plugin_oauth2}</a></li><!--{/if}-->
+<!--{if $user['isfounder']}--><li><a href="admin.php?m=plugin&a=oauth2" target="main">OAuth2管理</a></li><!--{/if}-->
 ```
 
 ### 2. DB初始化
