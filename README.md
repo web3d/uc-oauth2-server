@@ -29,7 +29,7 @@ git clone https://github.com/web3d/uc-oauth2-server.git oauth2
 
 ### 2. DB初始化
 
-从后台菜单访问“OAuth2管理”,系统会做初始化检测,首次会自动创建相应DB结构,前提是mysql帐号拥有DB的表创建\修改权限.
+从后台菜单访问“OAuth2管理”,系统会做初始化检测,首次会自动创建相应DB结构,前提是mysql帐号拥有DB的表创建、修改权限.
 
 ## 用法
 
