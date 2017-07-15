@@ -4,6 +4,17 @@ discuz uc_server 的 oauth2实现
 
 基于<https://github.com/bshaffer/oauth2-server-php> (目前是v1.8.0)实现oauth2流程.
 
+## OAuth2基本概念
+
+可以参看:<http://bshaffer.github.io/oauth2-server-php-docs/overview/grant-types/>
+
+其中授权类型有
+
+* Authorization Code: id:authorization_code;grant_type:code;标准流程,适用于开放给第三方网站或第三方APP的场景;
+* Resource Owner Password Credentials: id:user_credentials;grant_type:password;传用户的用户名密码直接返回Access Token;
+* Client Credentials: id:client_credentials;grant_type:client_credentials;适用于平台自己的子应用在服务器端调用的场景;
+* Refresh Token: id:refresh_token;用老的Access Token 换新的Access Token;
+* Implicit: id:token;与Authorization Code类似,但更适合于纯客户端应用,因为其ClientSecret容易暴露
 
 ## 安装
 
