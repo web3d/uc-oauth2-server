@@ -10,8 +10,9 @@ $self_host = 'http://' . $_SERVER['HTTP_HOST'];
 $server_host = $self_host;
 $server_url = $server_host . dirname(dirname($_SERVER['SCRIPT_NAME']));
 
+// client 应用id 改成应用自己的
 $client_id = 1;
-// 应用对应的authkey
+// 应用对应的authkey 改成应用自己的
 $client_secret = 'rfHb43Jfu4B0z85dK2Y9BbWbW8pfL7q7C3BcMf364ezeLdCepac1fdd47fqfo54f';
 // 应用中填写的Redirect Uri
 $redirect_uri = $self_host . dirname($_SERVER['SCRIPT_NAME']) . '/';
