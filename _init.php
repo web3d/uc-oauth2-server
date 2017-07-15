@@ -22,8 +22,8 @@ require_once UC_DATADIR . 'config.inc.php';
 ini_set('display_errors', UC_DEBUG ? true : false);
 error_reporting(UC_DEBUG ? E_ALL: 0);
 
-require_once(__DIR__ . '/lib/vendor/bshaffer/oauth2-server/src/OAuth2/Autoloader.php');
-require_once(__DIR__ . '/lib/UCServer/Autoloader.php');
+require_once(__DIR__ . '/vendor/bshaffer/oauth2-server/src/OAuth2/Autoloader.php');
+require_once(__DIR__ . '/vendor/UCServer/Autoloader.php');
 
 \OAuth2\Autoloader::register();
 \TimeCheer\UCServer\Autoloader::register();
