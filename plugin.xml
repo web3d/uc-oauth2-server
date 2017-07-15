@@ -11,13 +11,14 @@
 	<item id="lang">
 		<item id="plugin_oauth2">OAuth2Server</item>
 		<item id="oauth2_app_list_tips">与系统自带应用管理集成，为方便插件维护升级，此界面只包含OAuth独有功能</item>
-		<item id="oauth2_app_id">应用ID</item>
+		<item id="oauth2_app_id">Client ID</item>
+		<item id="oauth2_app_key">Client Secret</item>
 		<item id="oauth2_app_user">所属用户</item>
 		<item id="oauth2_app_edit_normal">编辑基本信息</item>
 		<item id="oauth2_app_edit_oauth">编辑OAuth信息</item>
 		<item id="oauth2_app_is_mobile">是否移动应用</item>
 		<item id="oauth2_app_is_mobile_comment">选否代表普通Web应用，选是代表移动应用无需填写回跳地址</item>
-		<item id="oauth2_app_redirect_uri">回跳地址</item>
+		<item id="oauth2_app_redirect_uri">Redirect Uri</item>
 		<item id="oauth2_app_redirect_uri_comment">Web应用需要填写用户完成授权后回跳页面地址</item>
 	</item>
 	<item id="install"><![CDATA[
