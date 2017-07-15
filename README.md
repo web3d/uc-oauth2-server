@@ -45,7 +45,9 @@ OAuth2机制使用uc_server本身的应用体系作为基础,增加oauth2所需�
 
 访问地址:<http://your_domain/uc_server/plugin/oauth2/authorize.php>,其他参数按oauth2标准格式组织,如
 
-?client_id=1&redirect_uri=http://your_domain/uc_server/plugin/oauth2/demo/&response_type=code&state=123456
+```
+http://your_domain/uc_server/plugin/oauth2/authorize.php?client_id=1&redirect_uri=http://your_domain/uc_server/plugin/oauth2/demo/&response_type=code&state=123456
+```
 
 换取用户Access Token:
 
