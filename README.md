@@ -33,7 +33,7 @@ git clone https://github.com/web3d/uc-oauth2-server.git oauth2
 
 ## 用法
 
-### 后台
+### 管理后台
 
 OAuth2机制使用uc_server本身的应用体系作为基础,增加oauth2所需的特性.
 
@@ -41,7 +41,7 @@ OAuth2机制使用uc_server本身的应用体系作为基础,增加oauth2所需�
 
 为了减少重复代码,在应用管理界面仅仅是设置OAuth2相关的参数,基本的应用创建还是在原应用管理界面进行.
 
-### 前台
+### Client端应用
 
 访问地址:<http://your_domain/uc_server/plugin/oauth2/authorize.php>,其他参数按oauth2标准格式组织,如
 
@@ -54,3 +54,4 @@ http://your_domain/uc_server/plugin/oauth2/authorize.php?client_id=1&redirect_ur
 ```
 curl -d "client_id=1&client_secret=R16aB3N6W5dbQbS4k6l2VaP538B632S0w110A8qe42jb2fP9I2i8t1t8C7ge93nb&grant_type=authorization_code&code=abcd" http://your_domain/uc_server/plugin/oauth2/token.php
 ```
+可以参考demo目录下实例。
