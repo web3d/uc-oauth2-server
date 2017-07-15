@@ -9,7 +9,9 @@ discuz uc_server 的 oauth2实现
 
 先将代码检出到 uc_server/plugin 目录下。
 
+```bash
 git clone https://github.com/web3d/uc-oauth2-server.git oauth2
+```
 
 ### 1. 增加后台菜单
 
