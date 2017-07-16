@@ -3,9 +3,10 @@
 namespace TimeCheer\UCServer\OAuth2\Server\Base;
 
 use OAuth2\Server as OAuth2Server;
+use OAuth2\Request;
+use OAuth2\Response;
 
-use OAuth2\Storage\Memory;
-use OAuth2\OpenID\GrantType\AuthorizationCode;
+use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\GrantType\UserCredentials;
 use OAuth2\GrantType\RefreshToken;
 
@@ -37,8 +38,8 @@ class Controller {
     public function __construct() {
         $this->initServer();
         
-        $this->request = \OAuth2\Request::createFromGlobals();
-        $this->response = new \OAuth2\Response();
+        $this->request = Request::createFromGlobals();
+        $this->response = new Response();
         
         $this->initialize();
     }

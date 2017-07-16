@@ -21,7 +21,7 @@ class Storage implements AuthorizationCodeInterface, AccessTokenInterface, Clien
     public function __construct($connection) {
 
         if (!is_array($connection)) {
-            throw new InvalidArgumentException('First argument to OAuth2_Storage_Baobei must be an instance of PDO or a configuration array');
+            throw new InvalidArgumentException('First argument to OAuth2_Storage must be an instance of PDO or a configuration array');
         }
         if (!isset($connection['dsn'])) {
             throw new InvalidArgumentException('configuration array must contain "dsn"');
@@ -190,12 +190,12 @@ class Storage implements AuthorizationCodeInterface, AccessTokenInterface, Clien
     }
 
     // plaintext passwords are bad!  Override this for your application
-    protected function checkPassword($user, $password) {
+    public function checkPassword($user, $password) {
         return $user['password'] == md5(md5($password) . $user['salt']);
     }
 
     public function getUser($username) {
-        $stmt = $this->db->prepare($sql = sprintf('SELECT uid AS user_id, password, salt from %s where username=:username', $this->config['user_table']));
+        $stmt = $this->db->prepare($sql = sprintf('SELECT uid AS user_id, username, password, salt from %s where username=:username', $this->config['user_table']));
         $stmt->execute(array('username' => $username));
         return $stmt->fetch();
     }

@@ -25,32 +25,46 @@ class AuthorizeController extends Controller {
      */
     public function index() {
         if (!empty($_POST)) {
-            $authored = $this->ifAuthorized();
+            // 标准流程
+            $username = $this->ifAuthorized();
+            // call the oauth server and return the response
+            $this->server->handleAuthorizeRequest($this->request, $this->response, (bool) $username, $username);
+            $this->server->getResponse()->send();
             return;
         }
         if (!$this->server->validateAuthorizeRequest($this->request, $this->response)) {
             $this->server->getResponse()->send();
             exit;
         }
+        
+        // 默认 authorization_code 先显示用户登录授权界面
         $this->view->assign('a', 1);
         $this->view->display('oauth2_login');
     }
     
+    /**
+     * 标准授权流程的前置校验流程,验证功能共用password类型的功能
+     * @return boolean|string username
+     */
     protected function ifAuthorized() {
-        $username = $this->request->request('username');
-        $password = $this->request->request('password');
+        $response_type = $this->request->query('response_type');
         
-        /*$ucmember_model = new \User\Api\UserApi();
+        // 需要用户在授权界面上登录
+        if ('code' == $response_type) {
+            $username = trim($this->request->request('username'));
+            $password = $this->request->request('password');
+            
+            $storage = $this->server->getStorage('user_credentials');
+            
+            $user = $storage->getUser($username);
+            if (!$user) {
+                return false;
+            }
+            $result = $storage->checkPassword($user, $password);
+            
+            return $result ? $user['user_id'] : false;
+        }
         
-        $uid = $ucmember_model->login($username, $password);//(bool) I('post.authorize');
-        if ($uid < 1) {
-            return false;
-        }*/
-        
-        // call the oauth server and return the response
-        $this->server->handleAuthorizeRequest($this->request, $this->response, true, 1);
-        $this->server->getResponse()->send();
-        
-        return true;
+        return false;
     }
 }
