@@ -6,6 +6,8 @@ discuz uc_server 的 oauth2实现
 
 ## OAuth2基本概念
 
+OAuth2的Server可以分为两大类:授权(Authorization)服务和资源(Resource)服务,本插件目前主要实现了授权服务,Resource服务需要使用者进一步开发。
+
 可以参看:<http://bshaffer.github.io/oauth2-server-php-docs/overview/grant-types/>
 
 其中授权类型有
